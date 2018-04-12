@@ -19,20 +19,34 @@
 To run `pytest`, you need to replace `repository_name` with your name of repository (more specifically directory name).
 
 ```
-docker run -it --volume $(pwd):/tmp/repository_name --workdir /tmp/repository_name makotonagai/pyspark-pytest pytest
+docker run -it --rm \
+  --volume $(pwd):/tmp/repository_name \
+  --workdir /tmp/repository_name \
+  i05nagai/pyspark-pytest:latest \
+  pytest
 ```
 
 or by using short option
 
 ```
-docker run -it -v $(pwd):/tmp/repository_name -w /tmp/repository_name makotonagai/pyspark-pytest pytest
+docker run --rm -it \
+  -v $(pwd):/tmp/repository_name \
+  -w /tmp/repository_name \
+  i05nagai/pyspark-pytest:latest \
+  pytest
 ```
 
-For instance, run the examples,
+For instance, run the examples, 
 
 ```
-docker run -it --volume $(pwd)/example:/tmp/example --workdir /tmp/example makotonagai/pyspark-pytest pytest
+docker run -it \
+  --volume $(pwd):/opt/local/pyspark-pytest \
+  --workdir /opt/local/pyspark-pytest \
+  i05nagai/pyspark-pytest:latset \
+  pytest --cov=. --pep8
 ```
+
+See `docker_run_example.sh`.
 
 
 ## Notes
