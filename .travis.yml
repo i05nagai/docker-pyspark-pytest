@@ -1,0 +1,19 @@
+sudo: required
+
+services:
+  - docker
+
+install:
+  - docker version
+  - docker login --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD
+
+script:
+  - docker build -t $DOCKER_IMAGE_NAME .
+  - docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$SPARK_VERSION
+  - docker push $DOCKER_IMAGE_NAME
+
+env:
+  global:
+    - DOCKER_IMAGE_NAME=i05nagai/pyspark-pytest
+    - SPARK_VERSION=2.1.1-alpine
+
