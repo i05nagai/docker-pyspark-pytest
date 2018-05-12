@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t makotonagai/pyspark-pytest .
+docker build -t i05nagai/pyspark-pytest .

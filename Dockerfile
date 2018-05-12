@@ -1,4 +1,4 @@
-FROM makotonagai/pyspark:latest
+FROM i05nagai/pyspark-alpine:latest
 
 ENV PYTEST_VERSION 3.1.2
 ENV PYTEST_MOCK_VERSION 1.6.2
