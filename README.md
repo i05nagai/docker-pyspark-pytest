@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/i05nagai/docker-pyspark-pytest.svg?branch=master)](https://travis-ci.org/i05nagai/docker-pyspark-pytest)
 
 ## Overviews
-* [makoto-nagai/docker-pyspark: Docker image of Apache Spark with its Python interface, pyspark.](https://github.com/makoto-nagai/docker-pyspark)
+* [docker\-sandbox/docker\-pyspark/alpine at master · i05nagai/docker\-sandbox](https://github.com/i05nagai/docker-sandbox/tree/master/docker-pyspark/alpine)
     * Base docker image
 * pytest
     * 3.1.2
