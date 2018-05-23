@@ -26,15 +26,6 @@ docker run -it --rm \
   pytest
 ```
 
-or by using short option
-
-```
-docker run --rm -it \
-  -v $(pwd):/tmp/repository_name \
-  -w /tmp/repository_name \
-  i05nagai/pyspark-pytest:latest \
-  pytest
-```
 
 For instance, run the examples, 
 
@@ -46,7 +37,7 @@ docker run -it \
   pytest --cov=. --pep8
 ```
 
-See `docker_run_example.sh`.
+See `docker_run_example.sh` for more details.
 
 
 ## Notes
@@ -60,3 +51,5 @@ git push origin pytest-3.1.2
 
 Then you can push your commits to the remote repository.
 
+## Reference
+* [Generate Test CSV Data](http://www.convertcsv.com/generate-test-data.htm)

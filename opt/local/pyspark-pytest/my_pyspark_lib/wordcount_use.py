@@ -8,7 +8,7 @@ from __future__ import division
 from __future__ import print_function
 
 import pyspark
-import sys
+import os
 
 from . import wordcount
 
@@ -27,11 +27,33 @@ def word_counts(sc, filename):
     return results
 
 
+def group_by_age(spark, filename):
+    """word_counts
+
+    :param filename:
+
+    :return: word and counts.
+    :rtype: dict
+    """
+
+    df = spark.read.option('header', 'true').csv(path_to_csv)
+    results = wordcount.do_gorup_by_age(df)
+    return results
+
+
 if __name__ == "__main__":
+    conf = pyspark.SparkConf(
+    ).setMaster(
+        'local[*]'
+    ).setAppName(
+        'pyspark-sample'
+    )
+    sc = pyspark.SparkContext(conf=conf)
+    spark = pyspark.sql.SparkSession(sc)
 
-    if len(sys.argv) != 2:
-        sys.exit("Usage: wordcount file}")
-
-    sc = pyspark.SparkContext(appName="PythonWordCount")
-
-    print(word_counts(sc, sys.argv[1]))
+    path_to_this_dir = os.path.abspath(os.path.dirname(__file__))
+    path_to_data_dir = os.path.join(path_to_this_dir, '../data')
+    path_to_txt = os.path.join(path_to_data_dir, 'data.txt')
+    path_to_csv = os.path.join(path_to_data_dir, 'data.csv')
+    print(word_counts(sc, path_to_txt))
+    print(group_by_age(spark, path_to_csv))

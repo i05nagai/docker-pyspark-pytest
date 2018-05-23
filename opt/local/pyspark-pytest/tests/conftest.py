@@ -74,7 +74,7 @@ def spark_session(request):
     """
     spark = (pyspark.sql.SparkSession
              .builder
-             .master('local')
+             .master('local[*]')
              .appName('pytest-pyspark-sql-local-testing')
              .config('spark.debug.maxToStringFields', 1000)
              .getOrCreate())

@@ -1,5 +1,6 @@
 import pytest
 import my_pyspark_lib.wordcount_use as target
+import builtins
 
 
 @pytest.mark.usefixtures("spark_context")
@@ -14,19 +15,24 @@ def test_word_counts(spark_context, mocker):
     # spark_context.addPyFile(target.__file__)
 
     filename = ''
-    read_data = [
+    input_data = [
         ' hello spark ',
         ' hello again spark spark'
     ]
-    mock = mocker.mock_open(read_data=read_data)
-    mocker.patch.object(target, 'open', mock)
-    # mock().write.assert_called_once_with(expected_text)
-    # mock().read.assert_called_once()
-    results = target.word_counts(spark_context, filename)
+    input_rdd = spark_context.parallelize(input_data, 1)
 
-    expected_results = {
+    spark_context = mocker.Mock()
+    spark_context.textFile.return_value = input_rdd
+
+    # if you want to mock methods in wordcount
+    # mocker.patch.object(target.wordcount, 'do_word_counts')
+    # target.wordcount.do_word_counts.return_value = {1: 1}
+
+    actual = target.word_counts(spark_context, filename)
+
+    expect = {
         'hello': 2,
         'spark': 3,
         'again': 1
     }
-    assert results == expected_results
+    assert expect == actual
